@@ -338,6 +338,7 @@ footer .credit a {
   border-radius: 10px;
   text-align: center;
   margin-top: 1rem;
+  float: right;
   color: #fff;
   background-color: var(--bg);
   cursor: pointer;
