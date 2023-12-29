@@ -348,14 +348,14 @@ body {
 /* Products Section */
 .products .row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1.5rem;
   margin-top: 4rem;
 }
 .products .product-cart {
   text-align: center;
   border: 1px solid #666;
-  padding: 2rem;
+  padding: 1rem;
 }
 .products .product-icons {
   display: flex;
@@ -386,7 +386,7 @@ body {
   padding: 1rem 0;
 }
 .products .product-image img {
-  height: 25rem;
+  height: 20rem;
 }
 .products .product-content h3 {
   font-size: 2rem;
