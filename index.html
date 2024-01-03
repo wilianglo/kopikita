@@ -16,6 +16,7 @@
     <!-- My Css -->
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- app -->
     <script src="src/app.js"></script>
   </head>
   <body>
@@ -136,70 +137,102 @@
     </section>
     <!-- Menu Section End -->
     <!-- Menu Product Start -->
-    <section class="products" id="products">
+    <section class="products" id="products" x-data="products">
       <h2><span>Produk Unggulan</span> Kami</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, quasi aut asperiores quia consequatur ea.</p>
       <div class="row">
-        <div class="product-cart">
+       <template x-for="(item, index) in items" x-key="index">
+        <div class="product-card">
           <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
+            <a href="#" @click="$store.cart.add(item)"><svg
+              width="24"  
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="img/feather-sprite.svg#shopping-cart" />
+            </svg></a>
+            <a href="#" class="item-detail-button"><svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="img/feather-sprite.svg#eye" />
+            </svg></a>
           </div>
           <div class="product-image">
-            <img src="img/products/product1.jpg" alt="Product 1" />
+            <img :src="`img/products/${item.img}`" :alt="item.name" />
           </div>
           <div class="product-content">
-            <h3>Coffee Bean Brazil</h3>
+            <h3 x-text="item.name"></h3>
             <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
+              <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="img/feather-sprite.svg#star" />
+            </svg>
+            <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="img/feather-sprite.svg#star" />
+            </svg>
+            <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="img/feather-sprite.svg#star" />
+            </svg>
+            <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="img/feather-sprite.svg#star" />
+            </svg>
+            <svg
+              width="24"
+              height="24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="img/feather-sprite.svg#star" />
+            </svg>
             </div>
-            <div class="product-price">IDR 30K <span>IDR 55K</span></div>
+            <div class="product-price"><span x-text="rupiah(item.price)"></span></div>
           </div>
         </div>
-        <div class="product-cart">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/products/product2.jpg" alt="Product 2" />
-          </div>
-          <div class="product-content">
-            <h3>Coffee Bean Arabica</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 30K <span>IDR 55K</span></div>
-          </div>
-        </div>
-        <div class="product-cart">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/products/product3.jpg" alt="Product 3" />
-          </div>
-          <div class="product-content">
-            <h3>Coffee Bean Blend</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price">IDR 30K <span>IDR 55K</span></div>
-          </div>
-        </div>
+       </template>
       </div>
     </section>
     <!-- Menu Product End -->
