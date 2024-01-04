@@ -14,8 +14,39 @@ document.addEventListener('alpine:init', () => {
         total: 0,
         quantity: 0,
         add(newItem) {
-            console.log(newItem);
+            //CEK APAKAH ADA BARANG YANG SAMA DI CART
+            const cartItem = this.items.find((item) => item.id === newItem.id);
+            //Jika belum ada / cart masih kosong
+            if (!cartItem) {
+                this.items.push({...newItem, quantity: 1, total: newItem.price });
+                this.quantity++;
+                this.total += newItem.price;
+            } else {
+            //Jika barang sudah ada, cek apakah barang beda atau sama dengan yang ada di cart
+                this.items =  this.items.map( (item) => {
+                    //Jika barang berbeda
+                    if (item.id !== newItem.id) {
+                        return item;
+                    } else {
+                        //jika barang sudah ada, tambah quantity dan totalnya
+                        item.quantity++;
+                        item.total = item.price * item.quantity;
+                        this.quantity++;
+                        this.total += item.price;
+                        return item;
+                    }
+                    // console.log(this.total);
+                });
+            }
+   
         },
+        remove(id) {
+        //item yang akan dihapus berdasarkan id
+        const cartItem = this.items.find((item) => item.id === id);
+
+        //jika item lebih dari satu
+        
+        }
     });
 });
 //Konversi ke rupiah

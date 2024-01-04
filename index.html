@@ -21,7 +21,7 @@
   </head>
   <body>
     <!-- nav bar start -->
-    <nav class="mynavbar">
+    <nav class="mynavbar" x-data>
       <a href="#home" class="mynavbar-logo">Kenangan Semanis <span>Kopi Kita</span></a>
       <div class="mynavbar-nav">
         <a href="#home">Home</a>
@@ -32,7 +32,10 @@
       </div>
       <div class="mynavbar-extra">
         <a href="#" id="search-button"><i data-feather="search"></i></a>
-        <a href="#" id="shopping-cart-button"><i data-feather="shopping-cart"></i></a>
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
+        </a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
       </div>
       <!-- Search Form Start -->
@@ -43,30 +46,22 @@
       <!-- Search Form End -->
       <!-- Shopping cart start -->
       <div class="shopping-cart">
+      <template x-for="(item, index) in $store.cart.items" x-key="index">
         <div class="cart-item">
-          <img src="img/products/product1.jpg" alt="Product 1" />
+          <img :src="`img/products/${item.img}`" alt="item.name" />
           <div class="item-detail">
-            <h3>Product 1</h3>
-            <div class="item-price">IDR 30K</div>
+            <h3 x-text="item.name"></h3>
+            <div class="item-price">
+              <span x-text="rupiah(item.price)"></span> &times;
+              <button id="remove">&minus;</button>
+              <span x-text="item.quantity"></span>
+              <button id="add" @click="$store.cart.add(item)">&plus;</button>&equals;
+              <span x-text="rupiah(item.total)"></span>
+            </div>
           </div>
-          <i data-feather="trash-2" class="remove-item"></i>
+          <!-- <i data-feather="trash-2" class="remove-item"></i> -->
         </div>
-        <div class="cart-item">
-          <img src="img/products/product2.jpg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 2</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
-        <div class="cart-item">
-          <img src="img/products/product3.jpg" alt="Product 1" />
-          <div class="item-detail">
-            <h3>Product 3x`</h3>
-            <div class="item-price">IDR 30K</div>
-          </div>
-          <i data-feather="trash-2" class="remove-item"></i>
-        </div>
+      </template>
       </div>
       <!-- Shopping cart end -->
     </nav>
@@ -144,7 +139,7 @@
        <template x-for="(item, index) in items" x-key="index">
         <div class="product-card">
           <div class="product-icons">
-            <a href="#" @click="$store.cart.add(item)"><svg
+            <a href="#" @click.prevent="$store.cart.add(item)"><svg
               width="24"  
               height="24"
               fill="none"
